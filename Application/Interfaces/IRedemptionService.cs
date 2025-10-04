@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace agdata.Application.Interfaces
 {
-   
-     public interface IRedemptionService
+    public interface IRedemptionService
     {
-        Redemption Redeem(Guid userId, Guid productId);
-        void Approve(Guid redemptionId);
-        void Complete(Guid redemptionId);
-        void Reject(Guid redemptionId);
-        IEnumerable<Redemption> GetAll();
+        Redemption RedeemProduct(Guid userId, Guid productId); // create redemption
+        IEnumerable<Redemption> GetAllRedemptions(); // get all
+        Redemption GetRedemptionById(Guid id); // get by id
+        void ApproveRedemption(Guid id); // approve
+        void CompleteRedemption(Guid id); // complete
+        void RejectRedemption(Guid id); // reject
     }
 }

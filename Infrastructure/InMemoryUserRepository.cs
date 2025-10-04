@@ -8,21 +8,31 @@ using System.Threading.Tasks;
 
 namespace agdata.Infrastructure
 {
-    public class InMemoryUserRepository : IUserRepository, IUserAccountRepository
+    public class InMemoryUserRepository : IUserRepository
     {
-        public void Add(User user) => InMemoryDatabase.Users.Add(user);
+        private readonly List<User> _users = new List<User>(); // in-memory storage
 
-        public User GetByEmail(string email) =>
-            InMemoryDatabase.Users.FirstOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+        public void Add(User user) => _users.Add(user); // add user
 
-        public User GetById(Guid id) =>
-            InMemoryDatabase.Users.FirstOrDefault(u => u.Id == id);
+        public User GetById(Guid id) => _users.FirstOrDefault(u => u.Id == id); // find user by ID
 
-        public IEnumerable<User> GetAll() => InMemoryDatabase.Users;
+        public User GetByEmail(string email) => _users.FirstOrDefault(u => u.Email == email); // find user by email
 
-        public void Add(UserAccount account) => InMemoryDatabase.UserAccounts.Add(account);
+        public IEnumerable<User> GetAll() => _users; // return all users
 
-        public UserAccount GetByUserId(Guid userId) =>
-            InMemoryDatabase.UserAccounts.FirstOrDefault(a => a.UserId == userId);
+        public void AddPoints(Guid userId, int points)
+        {
+            var user = _users.FirstOrDefault(u => u.Id == userId);
+            if (user == null) throw new Exception("User not found");
+            user.Points += points; // add points
+        }
+
+        public void RedeemPoints(Guid userId, int points)
+        {
+            var user = _users.FirstOrDefault(u => u.Id == userId);
+            if (user == null) throw new Exception("User not found");
+            if (user.Points < points) throw new Exception("Insufficient points");
+            user.Points -= points; // redeem points
+        }
     }
 }

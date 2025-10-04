@@ -9,10 +9,8 @@ namespace agdata.Application.Interfaces
 {
     public interface IProductService
     {
-        Product Create(string name, int requiredPoints, int initialStock);
-        Product GetById(Guid id);
-        IEnumerable<Product> GetAll();
-        void UpdatePrice(Guid id, int newPoints);
-        void ChangeStock(Guid id, int delta);
+        Product CreateProduct(string name, int pointsRequired);
+        IEnumerable<Product> GetAllProducts();
+        Product GetProductById(Guid id);
     }
 }

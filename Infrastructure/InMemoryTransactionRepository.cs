@@ -10,23 +10,31 @@ namespace agdata.Infrastructure
 {
     public class InMemoryTransactionRepository : ITransactionRepository
     {
+        // Add a transaction to in-memory database
         public void Add(Transaction tx)
         {
             if (tx == null) throw new ArgumentNullException(nameof(tx));
             InMemoryDatabase.Transactions.Add(tx);
         }
 
+        // Get all transactions
+        public IEnumerable<Transaction> GetAll()
+        {
+            return InMemoryDatabase.Transactions;
+        }
+
+        // Get transaction by ID
+        public Transaction GetById(Guid id)
+        {
+            return InMemoryDatabase.Transactions.FirstOrDefault(t => t.Id == id);
+        }
+
+        // Get transactions by User ID
         public IEnumerable<Transaction> GetByUserId(Guid userId)
         {
-            var result = new List<Transaction>();
-
-            foreach (var tx in InMemoryDatabase.Transactions)
-            {
-                if (tx != null && tx.GetType().GetProperty("UserId")?.GetValue(tx) is Guid id && id == userId)
-                    result.Add(tx);
-            }
-
-            return result;
+            return InMemoryDatabase.Transactions
+                .Where(t => t.UserId == userId)
+                .ToList();
         }
     }
 }

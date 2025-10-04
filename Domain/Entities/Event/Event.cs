@@ -8,9 +8,10 @@ namespace agdata.Domain.Entities.Event
 {
     public class Event
     {
-        public string Name { get; private set; }
-        public DateTime Date { get; private set; }
-        public int PointsAwarded { get; private set; }
+        public Guid Id { get; set; } // added ID
+        public string Name { get; set; } // changed to public setter
+        public DateTime Date { get; set; } // changed to public setter
+        public int PointsAwarded { get; set; } // changed to public setter
 
         public Event(string name, DateTime date, int pointsAwarded)
         {
@@ -19,5 +20,7 @@ namespace agdata.Domain.Entities.Event
             Date = date;
             PointsAwarded = pointsAwarded;
         }
+
+        public Event() { } // default constructor so initializer works
     }
 }

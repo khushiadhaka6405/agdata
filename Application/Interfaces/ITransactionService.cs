@@ -10,7 +10,9 @@ namespace agdata.Application.Interfaces
 {
     public interface ITransactionService
     {
-        Transaction Record(Guid userId, TransactionType type, int points);
-        IEnumerable<Transaction> ForUser(Guid userId);
+        Transaction CreateTransaction(Guid userId, TransactionType type, int points);
+        IEnumerable<Transaction> GetAllTransactions();
+        Transaction GetTransactionById(Guid id);
+        IEnumerable<Transaction> GetTransactionsByUserId(Guid userId);
     }
 }

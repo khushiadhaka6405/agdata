@@ -9,7 +9,9 @@ namespace agdata.Infrastructure
 {
     public interface ITransactionRepository
     {
-        void Add(Transaction transaction);
+        void Add(Transaction tx);
+        IEnumerable<Transaction> GetAll();
+        Transaction GetById(Guid id);
         IEnumerable<Transaction> GetByUserId(Guid userId);
     }
 }
