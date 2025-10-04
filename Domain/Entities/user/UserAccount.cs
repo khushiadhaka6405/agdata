@@ -8,24 +8,24 @@ namespace agdata.Domain.Entities.user
 {
     public class UserAccount
     {
-        public int PointsBalance { get; private set; }
+        public Guid UserId { get; private set; }
+        public int RewardBalance { get; private set; }
 
-        public UserAccount(int initialPoints = 0)
+        public UserAccount(Guid userId)
         {
-            PointsBalance = initialPoints;
+            UserId = userId;
+            RewardBalance = 0; // initial points
         }
 
         public void AddPoints(int points)
         {
-            if (points <= 0) throw new ArgumentException("Points must be positive.");
-            PointsBalance += points;
+            RewardBalance += points;
         }
 
         public void RedeemPoints(int points)
         {
-            if (points <= 0) throw new ArgumentException("Points must be positive.");
-            if (PointsBalance < points) throw new InvalidOperationException("Insufficient balance.");
-            PointsBalance -= points;
+            if (points > RewardBalance) throw new Exception("Insufficient points");
+            RewardBalance -= points;
         }
     }
 }

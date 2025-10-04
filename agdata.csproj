@@ -79,14 +79,14 @@
     <Compile Include="Infrastructure\ITransactionRepository.cs" />
     <Compile Include="Infrastructure\IUserAccountRepository.cs" />
     <Compile Include="Infrastructure\IUserRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\InMemoryUserAccountRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Services\UserServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
