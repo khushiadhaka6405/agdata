@@ -20,7 +20,7 @@ namespace agdata.Domain.Entities.user
         // Default constructor
         public User() { }
 
-        // Optional: parameterized constructor
+        //  parameterized constructor
         public User(Guid id, string name, string email, string employeeId, UserRole role)
         {
             Id = id;
